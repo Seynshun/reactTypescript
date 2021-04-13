@@ -1,4 +1,4 @@
-export interface Evaluations {
+export type Evaluations = {
   date: string;
   score: number;
 }

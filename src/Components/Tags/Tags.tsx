@@ -1,5 +1,5 @@
 import React from "react";
-import { StyledTags } from "../Style/StyledTags";
+import { StyledTags } from "./StyledTags";
 
 class Tags extends React.Component<{ score: number }> {
   render() {

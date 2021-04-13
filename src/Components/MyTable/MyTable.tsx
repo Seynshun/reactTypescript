@@ -1,13 +1,14 @@
 import * as React from "react";
 import { Table, Button } from "antd";
-import { Agent } from "../Types/Agents";
-import { Evaluations } from "../Types/Evaluations";
-import "antd/dist/antd.css";
-import data from "../Data/AgentsData.json";
-import Tags from "./Tags";
+import { Agent } from "../../Types/Agents";
+import { Evaluations } from "../../Types/Evaluations";
+import data from "../../Data/AgentsData.json";
+import Tags from "../Tags/Tags";
+import moment from "moment";
+import "moment/locale/fr";
 
 class MyTable extends React.Component {
-  columns: any = [
+  columns = [
     {
       title: "Agent",
       render: (record: { agent: Agent }) =>
@@ -35,13 +36,8 @@ class MyTable extends React.Component {
       title: "Dernière évaluation",
       render: (record: { recentEvaluations: [Evaluations] }) =>
         record.recentEvaluations.slice(0, 1).map((entry, index) => {
-          let date: Date = new Date(entry.date);
-          let frenchDate: string = new Intl.DateTimeFormat("fr-FR", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }).format(date);
-          return frenchDate;
+          let date: any = moment(entry.date).format("DD MMMM YYYY");
+          return date;
         }),
     },
     {
