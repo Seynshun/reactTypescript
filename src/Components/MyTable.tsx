@@ -34,7 +34,15 @@ class MyTable extends React.Component {
     {
       title: "Dernière évaluation",
       render: (record: { recentEvaluations: [Evaluations] }) =>
-        record.recentEvaluations[0].date,
+        record.recentEvaluations.slice(0, 1).map((entry, index) => {
+          let date: Date = new Date(entry.date);
+          let frenchDate: string = new Intl.DateTimeFormat("fr-FR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }).format(date);
+          return frenchDate;
+        }),
     },
     {
       render: () => <Button type="primary">Voir</Button>,

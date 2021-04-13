@@ -4,19 +4,19 @@ import { StyledTags } from "../Style/StyledTags";
 class Tags extends React.Component<{ score: number }> {
   render() {
     const { score } = this.props;
-    let tag;
+    let color: string = "";
     switch (true) {
       case score >= 80:
-        tag = <StyledTags color="green"></StyledTags>;
+        color = "green";
         break;
       case score >= 50 && score < 80:
-        tag = <StyledTags color="orange"></StyledTags>;
+        color = "orange";
         break;
       case score < 50:
-        tag = <StyledTags color="red"></StyledTags>;
+        color = "red";
         break;
     }
-    return tag;
+    return <StyledTags color={color}></StyledTags>;
   }
 }
 
