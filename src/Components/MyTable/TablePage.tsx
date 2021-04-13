@@ -1,11 +1,11 @@
 import { Table, Button } from "antd";
 import moment from "moment";
 import "moment/locale/fr";
-import { Agent } from "../../Types/Agents";
+import { AgentType } from "../../Types/AgentType";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchAgentsData } from "../../actions/agentsDataActions";
-import { Evaluations } from "../../Types/Evaluations";
+import { EvaluationsType } from "../../Types/EvaluationsType";
 import Tags from "../Tags/Tags";
 
 const TablePage = ({ dispatch, loading, agentsData, hasErrors }: any) => {
@@ -16,7 +16,7 @@ const TablePage = ({ dispatch, loading, agentsData, hasErrors }: any) => {
   const columns = [
     {
       title: "Agent",
-      render: (record: { agent: Agent }) =>
+      render: (record: { agent: AgentType }) =>
         record.agent.firstName + " " + record.agent.lastName,
       key: "agent",
     },
@@ -32,14 +32,14 @@ const TablePage = ({ dispatch, loading, agentsData, hasErrors }: any) => {
     },
     {
       title: "Dynamique",
-      render: (record: { recentEvaluations: [Evaluations] }) =>
+      render: (record: { recentEvaluations: EvaluationsType }) =>
         record.recentEvaluations.map((entry, index) => {
           return <Tags key={index} score={entry.score} />;
         }),
     },
     {
       title: "Dernière évaluation",
-      render: (record: { recentEvaluations: [Evaluations] }) =>
+      render: (record: { recentEvaluations: EvaluationsType }) =>
         record.recentEvaluations.slice(0, 1).map((entry, index) => {
           let date: string = moment(entry.date).format("D MMMM YYYY");
           return date;
