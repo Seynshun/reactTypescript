@@ -1,4 +1,4 @@
-export type Evaluations = {
+export type EvaluationType = {
   date: string;
   score: number;
 }
