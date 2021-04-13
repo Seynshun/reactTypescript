@@ -36,7 +36,7 @@ class MyTable extends React.Component {
       title: "Dernière évaluation",
       render: (record: { recentEvaluations: [Evaluations] }) =>
         record.recentEvaluations.slice(0, 1).map((entry, index) => {
-          let date: any = moment(entry.date).format("DD MMMM YYYY");
+          let date: string = moment(entry.date).format("DD MMMM YYYY");
           return date;
         }),
     },
