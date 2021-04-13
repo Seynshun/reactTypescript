@@ -1,21 +1,21 @@
-import { AgentType } from "../../Types/AgentType";
-import { EvaluationsType } from "../../Types/EvaluationsType";
+import { AgentType } from "../../Types/Agent";
+import { EvaluationsType } from "../../Types/Evaluations";
 import { Button } from "antd";
 import Tags from "../Tags/Tags";
 import moment from "moment";
 import "moment/locale/fr";
 
-function formatDate(recentEvaluations: EvaluationsType) {
+const formatDate = (recentEvaluations: EvaluationsType) => {
   return recentEvaluations.slice(0, 1).map((entry) => {
     return moment(entry.date).format("DD MMMM YYYY");
   });
-}
+};
 
-function createTags(recentEvaluations: EvaluationsType) {
+const createTags = (recentEvaluations: EvaluationsType) => {
   return recentEvaluations.map((entry, index) => {
     return <Tags key={index} score={entry.score} />;
   });
-}
+};
 
 export const columns = [
   {
