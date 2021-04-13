@@ -1,15 +1,19 @@
-import * as React from "react";
 import { Table, Button } from "antd";
-import { Agent } from "../../Types/Agents";
-import { Evaluations } from "../../Types/Evaluations";
-import data from "../../Data/AgentsData.json";
-import Tags from "../Tags/Tags";
 import moment from "moment";
 import "moment/locale/fr";
-import { RouteComponentProps } from "@reach/router";
+import { Agent } from "../../Types/Agents";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchAgentsData } from "../../actions/agentsDataActions";
+import { Evaluations } from "../../Types/Evaluations";
+import Tags from "../Tags/Tags";
 
-class MyTable extends React.Component<RouteComponentProps> {
-  columns = [
+const TablePage = ({ dispatch, loading, agentsData, hasErrors }: any) => {
+  useEffect(() => {
+    dispatch(fetchAgentsData());
+  }, [dispatch]);
+
+  const columns = [
     {
       title: "Agent",
       render: (record: { agent: Agent }) =>
@@ -37,7 +41,7 @@ class MyTable extends React.Component<RouteComponentProps> {
       title: "Dernière évaluation",
       render: (record: { recentEvaluations: [Evaluations] }) =>
         record.recentEvaluations.slice(0, 1).map((entry, index) => {
-          let date: string = moment(entry.date).format("DD MMMM YYYY");
+          let date: string = moment(entry.date).format("D MMMM YYYY");
           return date;
         }),
     },
@@ -46,15 +50,24 @@ class MyTable extends React.Component<RouteComponentProps> {
     },
   ];
 
-  render() {
+  const table = () => {
+    if (loading) return <p>Loading</p>;
+    if (hasErrors) return <p>Has Errors</p>;
     return (
       <Table
-        columns={this.columns}
-        dataSource={data}
+        columns={columns}
+        dataSource={agentsData}
         pagination={{ pageSize: 3 }}
       />
     );
-  }
-}
+  };
+  return <section>{table()}</section>;
+};
 
-export default MyTable;
+const mapStateToProps = (state: any) => ({
+  loading: state.agentsData.loading,
+  agentsData: state.agentsData.agentsData,
+  hasErrors: state.agentsData.hasErrors,
+});
+// Connect Redux to React
+export default connect(mapStateToProps)(TablePage);
