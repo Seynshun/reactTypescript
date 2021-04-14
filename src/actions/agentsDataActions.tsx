@@ -1,3 +1,5 @@
+import { AgentsDataType } from "../Types/AgentsData";
+
 export const GET_AGENTSDATA = "GET_AGENTSDATA";
 export const GET_AGENTSDATA_SUCCESS = "GET_AGENTSDATA_SUCCESS";
 export const GET_AGENTSDATA_FAILURE = "GET_AGENTSDATA_FAILURE";
@@ -6,7 +8,7 @@ export const getAgentsData = () => ({
   type: GET_AGENTSDATA,
 });
 
-export const getAgentsDataSuccess = (agentsData: any) => ({
+export const getAgentsDataSuccess = (agentsData: AgentsDataType) => ({
   type: GET_AGENTSDATA_SUCCESS,
   payload: agentsData,
 });
