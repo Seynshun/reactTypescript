@@ -1,11 +1,12 @@
 import "./App.css";
-import Table from "./Components/MyTable/MyTable";
+import Table from "./Components/MyTable/TablePage";
+import { Router } from "@reach/router";
 
 function App() {
   return (
-    <div className="App">
-      <Table />
-    </div>
+    <Router>
+      <Table path="/" />
+    </Router>
   );
 }
 
