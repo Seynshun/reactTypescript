@@ -1,4 +1,5 @@
 import * as actions from "../actions/agentsDataActions";
+import produce from "immer";
 
 export const initialState = {
   agentsData: [],
@@ -9,11 +10,20 @@ export const initialState = {
 export default function agentsDataReducer(state = initialState, action: any) {
   switch (action.type) {
     case actions.GET_AGENTSDATA:
-      return { ...state, loading: true };
+      return produce(initialState, (draft) => {
+        draft.loading = true;
+      });
     case actions.GET_AGENTSDATA_SUCCESS:
-      return { agentsData: action.payload, loading: false, hasErrors: false };
+      return produce(initialState, (draft) => {
+        draft.agentsData = action.payload;
+        draft.loading = false;
+        draft.hasErrors = false;
+      });
     case actions.GET_AGENTSDATA_FAILURE:
-      return { ...state, loading: false, hasErrors: true };
+      return produce(initialState, (draft) => {
+        draft.agentsData = [];
+        draft.hasErrors = true;
+      });
     default:
       return state;
   }

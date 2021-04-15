@@ -2,12 +2,12 @@ import "./App.css";
 import Table from "./Components/MyTable/TablePage";
 import { Router } from "@reach/router";
 
-function App() {
+const App: React.FunctionComponent = () => {
   return (
     <Router>
       <Table path="/" />
     </Router>
   );
-}
+};
 
 export default App;

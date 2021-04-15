@@ -1,4 +1,4 @@
-import { AgentsDataType } from "../Types/AgentsData";
+import { AgentsDataType } from "../../Types/Agent";
 
 export const GET_AGENTSDATA = "GET_AGENTSDATA";
 export const GET_AGENTSDATA_SUCCESS = "GET_AGENTSDATA_SUCCESS";

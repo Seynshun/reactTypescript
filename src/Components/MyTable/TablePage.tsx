@@ -1,14 +1,26 @@
 import { Table } from "antd";
 import "moment/locale/fr";
 import { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchAgentsData } from "../../actions/agentsDataActions";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAgentsData } from "../../redux/actions/agentsDataActions";
+import { RootState } from "../../redux/reducers";
 import { columns } from "./Columns";
 
-const TablePage = ({ dispatch, loading, agentsData, hasErrors }: any) => {
+type TablePageProps = {
+  path: string;
+};
+
+const TablePage: React.FunctionComponent<TablePageProps> = ({
+  loading,
+  hasErrors,
+}: any) => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchAgentsData());
-  }, [dispatch]);
+  }, []);
+
+  const agents = useSelector((state: RootState) => state.agentsData.agentsData);
 
   const table = () => {
     if (loading) return <p>Loading</p>;
@@ -16,7 +28,7 @@ const TablePage = ({ dispatch, loading, agentsData, hasErrors }: any) => {
     return (
       <Table
         columns={columns}
-        dataSource={agentsData}
+        dataSource={agents}
         pagination={{ pageSize: 3 }}
       />
     );
@@ -24,10 +36,4 @@ const TablePage = ({ dispatch, loading, agentsData, hasErrors }: any) => {
   return <section>{table()}</section>;
 };
 
-const mapStateToProps = (state: any) => ({
-  loading: state.agentsData.loading,
-  agentsData: state.agentsData.agentsData,
-  hasErrors: state.agentsData.hasErrors,
-});
-// Connect Redux to React
-export default connect(mapStateToProps)(TablePage);
+export default TablePage;
