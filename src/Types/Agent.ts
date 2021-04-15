@@ -10,7 +10,7 @@ export type AgentDataType = {
     agent : AgentType,
     evaluationNb : number,
     averageScore : number,
-    recentEvaluatons : EvaluationsType
+    recentEvaluations : EvaluationsType
 }
 
 export type AgentsDataType = AgentDataType[]
