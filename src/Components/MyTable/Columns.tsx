@@ -32,20 +32,24 @@ export const columns = [
   {
     title: "Score moyen",
     dataIndex: "averageScore",
-    render: (averageScore: number) => averageScore + "%",
+    render: (averageScore: number) => {
+      if (averageScore !== undefined) return averageScore + "%";
+    },
     key: "averageScore",
   },
   {
     title: "Dynamique",
     dataIndex: "recentEvaluations",
-    render: (recentEvaluations: EvaluationsType) =>
-      createTags(recentEvaluations),
+    render: (recentEvaluations: EvaluationsType) => {
+      if (recentEvaluations !== undefined) return createTags(recentEvaluations);
+    },
   },
   {
     title: "Dernière évaluation",
     dataIndex: "recentEvaluations",
-    render: (recentEvaluations: EvaluationsType) =>
-      formatDate(recentEvaluations),
+    render: (recentEvaluations: EvaluationsType) => {
+      if (recentEvaluations !== undefined) return formatDate(recentEvaluations);
+    },
   },
   {
     render: () => <Button type="primary">Voir</Button>,

@@ -1,11 +1,11 @@
 import "./App.css";
-import Table from "./Components/MyTable/TablePage";
 import { Router } from "@reach/router";
+import TablePage from "./Components/MyTable/TablePage";
 
 const App: React.FunctionComponent = () => {
   return (
     <Router>
-      <Table path="/" />
+      <TablePage path="/" />
     </Router>
   );
 };

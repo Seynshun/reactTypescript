@@ -24,6 +24,11 @@ export default function agentsDataReducer(state = initialState, action: any) {
         draft.agentsData = [];
         draft.hasErrors = true;
       });
+
+    case actions.ADD_AGENTSDATA_SUCCESS:
+      return produce(state, (draft: any) => {
+        draft.agentsData.push(action.payload);
+      });
     default:
       return state;
   }
