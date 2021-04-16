@@ -23,20 +23,6 @@ export const addAgents = (agentData: AgentDataType) => ({
   payload: agentData,
 });
 
-export function fetchAgentsData() {
-  return async (dispatch: any) => {
-    dispatch(getAgentsData());
-    try {
-      const response = await fetch("AgentsData.json");
-      const data = await response.json();
-
-      dispatch(getAgentsDataSuccess(data));
-    } catch (error) {
-      dispatch(getAgentsDataFailure());
-    }
-  };
-}
-
 export function addAgentsData(agentData: AgentDataType) {
   return async (dispatch: any) => {
     dispatch(addAgents(agentData));

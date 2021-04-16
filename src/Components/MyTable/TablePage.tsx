@@ -4,7 +4,8 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addAgentsData,
-  fetchAgentsData,
+  ADD_AGENTSDATA_SUCCESS,
+  GET_AGENTSDATA,
 } from "../../redux/actions/agentsDataActions";
 import { RootState } from "../../redux/reducers";
 import { columns } from "./Columns";
@@ -18,13 +19,12 @@ const TablePage: React.FunctionComponent<TablePageProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAgentsData());
+    dispatch({ type: GET_AGENTSDATA });
   }, [dispatch]);
 
   const handleAgentCreation = useCallback(
     (agent) => {
-      console.log("Success" + JSON.stringify(agent));
-      dispatch(addAgentsData(agent));
+      dispatch({ type: ADD_AGENTSDATA_SUCCESS, payload: agent });
     },
     [dispatch]
   );
